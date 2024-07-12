@@ -1,22 +1,30 @@
 #!/usr/bin/python3
+"""
+Minimum Operations
+"""
+
+import math
 
 
-"""
-    The letter H is the only character in a text file.
-    There are only two operations that your text editor can do on 
-	this file: Copy All and Paste. Write a method that calculates 
-	given a number n.
-    the least amount of processes necessary to produce exactly 
-	n H characters in the file.
-"""
+def factors(n):
+    """factors of n number"""
+    mylist = []
+    while n % 2 == 0:
+        mylist.append(2)
+        n = n / 2
+    for i in range(3, int(math.sqrt(n)) + 1, 2):
+        while n % i == 0:
+            mylist.append(i)
+            n = n / i
+    if n > 2:
+        mylist.append(n)
+    return mylist
 
 
 def minOperations(n):
-    nOpe = 0
-    minOpe = 2
-    while n > 1:
-        while n % minOpe == 0:
-            nOpe += minOpe
-            n /= minOpe
-        minOpe += 1
-    return nOpei
+    """calculate the minimum operations"""
+    if type(n) != int or n < 2:
+        return 0
+    else:
+        numOperations = sum(factors(n))
+        return int(numOperations)
